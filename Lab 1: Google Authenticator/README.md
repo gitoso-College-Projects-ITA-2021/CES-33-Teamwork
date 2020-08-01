@@ -16,17 +16,21 @@ Este laboratório foi realizado em um sistema operacional __Ubuntu 20.04__ e o a
 Inicialmente deve-se instalar o pacote para o sistema operacional que irá fornecer as bibliotecas dinâmicas que serão carregadas utilizadas pelo PAM (``plugadas'' ao PAM) para utilizar o autenticador do __Google__ bem como a aplicação em modo texto que será utilizada para guiar o usuário durante o processo de configuração de um novo __token__. Para tanto deve-se executar o comando:
 
 ```
-sudo apt install ...
+sudo apt-get install libpam-google-authenticator
 ```
 
 ### Configurar o PAM para utilizar o módulo do Google Authenticator
 
 Em seguida, deve-se configurar os arquivos do PAM para que durante o login do sistema seja utilizado o módulo do __Google Authenticator__ instalado na etapa anterior. Os arquivos de configuração do Linux PAM residem no diretório `/etc/pam.d/`, sendo cada arquivo referente à uma determinado aplicação. Ademais, o arquivo `/etc/pam.d/other` contém configurações genéricas que também podem ser utilizadas por aplicações.
 
-A configuração do login do sistema é realizada editando-se o arquivo `/etc/pam.d/common-auth`. À este arquivo deve-se adicionar uma linha referente à utilizado do módulo do 2FA. O arquivo ficará com o seguinte formato:
+A configuração do login do sistema é realizada editando-se o arquivo `/etc/pam.d/common-auth`. Ao final deste arquivo deve-se adicionar uma linha referente à utilizado do módulo do 2FA. O arquivo ficará com o seguinte formato:
 
 ```
-
+# and here are more per-package modules (the "Additional" block)
+session required    pam_unix.so
+session optional    pam_systemd.so
+# end of pam-auth-update config
+auth required pam_google_authenticator.so nullok
 ```
 
 Importante: Antes de reiniciar a máquina é necessário instalar e configurar o aplicativo do __Google Authenticator__. Se for realizado o __logoff__ agora, não será possível realizar o __login__ na máquina pois a autenticação em duas etapas não foi propriamente configurada.
@@ -40,7 +44,7 @@ No dispositivo móvel instalar o aplicativo do __Google Authenticator__. Ele pod
 Para configurar o aplicativo, abrir um terminal e executar:
 
 ```
-aaaa
+google-authenticator
 ```
 
 Após seguir os passos instruídos pelo programa, a autenticação em dois fatores estará configurada para o usuário em questão. Basta reiniciar a máquina e a autenticação em duas etapas já entrará em ação no próximo __login__.
