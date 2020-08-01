@@ -50,4 +50,4 @@ google-authenticator
 
 Após seguir os passos instruídos pelo programa, a autenticação em dois fatores estará configurada para o usuário em questão. Basta reiniciar a máquina e a autenticação em duas etapas já entrará em ação no próximo _login_.
 
-DONE
+![Fim](https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif)
