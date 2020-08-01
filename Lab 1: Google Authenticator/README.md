@@ -26,6 +26,7 @@ Em seguida, deve-se configurar os arquivos do PAM para que durante o login do si
 A configuração do login do sistema é realizada editando-se o arquivo `/etc/pam.d/common-auth`. Ao final deste arquivo deve-se adicionar uma linha referente à utilizado do módulo do 2FA. O arquivo ficará com o seguinte formato:
 
 ```
+...
 # and here are more per-package modules (the "Additional" block)
 session required    pam_unix.so
 session optional    pam_systemd.so
