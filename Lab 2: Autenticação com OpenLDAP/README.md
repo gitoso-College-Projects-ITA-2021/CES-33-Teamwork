@@ -16,13 +16,27 @@ Além disso, foi configurado um contêiner pela equipe (também seguindo documen
 
 ## Execução
 
+### Dependências
+Para executar este laboratório, será necessário ter instalado a ferramenta _Docker_ e também um cliente local para acessar o _OpenLDAP_. Para instalar essas ferramentas no _Ubuntu_, basta executar:
+```
+sudo apt install docker.io
+```
+
 ### Preparar o contêiner com o servidor OpenLDAP
 
 Entrar na pasta do contêiner configurado pela equipe e utilizar o _Docker_ para "montar" o contêiner.
 
 ```
 cd OpenLDAP-Container/
-sudo docker build --tag archlinux_ldap:1.0
+sudo docker build --tag archlinux_ldap:1.0 .
+```
+
+(Note que existe um ponto ao final do comando)
+
+Em seguida, para execuar este contêiner, execute:
+
+```
+sudo docker run  -p 389:389 -p 636:636  --name arch --detach archlinux_ldap:1.0
 ```
 
 ### Preparar o contêiner com o front-end phpLDAPadmin para o OpenLDAP
@@ -52,10 +66,11 @@ sudo docker ps -a
 Em seguida, colocar os contêineres em execução (substituir `ID1` e `ID2` pelos IDs dos respectivos contêineres):
 
 ```
-sudo docker run ID1
-sudo docker run ID2
+sudo docker start ID1
+sudo docker start ID2
 ```
 
+(Se você seguiu este tutorial, um dos contêineres, contendo o servidor OpenLDAP já estava em execução. No entanto não há problema algum em executá-lo novamente)
 
 ### Entrar na interface phpLDAPadmin e criar um usuário
 
