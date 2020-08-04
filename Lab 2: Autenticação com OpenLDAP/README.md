@@ -74,7 +74,16 @@ sudo docker start ID2
 
 ### Entrar na interface phpLDAPadmin e criar um usuário
 
-...
+Em seu navegador, acesse `https://localhost:6443`. Será emitido um alerta sobre perigo devido à falta de certificados de sergurança. Como trata-se de uma interface web executando localmente, é seguro ignorar este aviso. Cada _browser_ possui uma maneira de ignorar este aviso. Na própria página de alerta deve haver alguma opção avançada que lhe permite ignorar o aviso. Caso sinta dificuldade nessa etapa, siga instruções do link: [Site não seguro: saiba como resolver esse problema](https://www.melhorhospedagemdesites.com/dicas-e-ferramentas/site-nao-seguro-como-resolver/)
+
+Acessando a _url_ fornecida, você irá se deparar com a página de _login_ da interface _phpLDAPadmin_. Realize o _login_ com as credenciais:
+  * Usuário: cn=root,dc=ces33,dc=com
+  * Senha: ces33
+
+![phpLDAPadmin Login](...)
+
+
+
 
 ### Configurar o cliente OpenLDAP na máquina para encontrar os usuários do servidor
 
