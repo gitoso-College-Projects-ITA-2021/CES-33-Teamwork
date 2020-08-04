@@ -85,32 +85,41 @@ Acessando a _url_ fornecida, você irá se deparar com a página de _login_ da i
 Antes de criarmos um usuário, vamos criar um grupo.
 
 No menu da lateral esquerda, expanda as opções e selecione a estrela com a opção "_Create new entry here_".
+
 ![New Group Step 1](screenshots/newgroup1.png)
 
 Em seguida, na lista de _templates_, selecione "_Generic: Posix Group_".
+
 ![New Group Step 2](screenshots/newgroup2.png)
 
 Preencha o nome do grupo (e.g. professores) e selecione "_Create Object_".
+
 ![New Group Step 3](screenshots/newgroup3.png)
 
 Confirme as informações e clique em "_Commit_".
+
 ![New Group Step 4](screenshots/newgroup4.png)
 
 Com o grupo criado, iremos agora criar um usuário.
 
 No menu da lateral esquerda, expanda a opção "_ou=People_" e selecione "_Create new entry here_".
+
 ![New User Step 1](screenshots/newuser1.png)
 
 Em seguida, na lista de _templates_, selecione "_Generic: User Account_".
+
 ![New User Step 2](screenshots/newuser2.png)
 
 Preencha os dados do seu novo usuário e na opção "_GID Number_" selecione o grupo criado anteriormente. Quando preenchidos os campos, clique em "_Create Object_".
+
 ![New User Step 3](screenshots/newuser3.png)
 
 Confirme as informações e clique em "_Commit_".
+
 ![New User Step 4](screenshots/newuser4.png)
 
 Confira no menu da lateral esquerda se o usuário foi criado com sucesso.
+
 ![New User Step 5](screenshots/newuser5.png)
 
 Pronto. Com o usuário criado, prosseguiremos o tutorial.
