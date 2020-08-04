@@ -10,7 +10,7 @@ O orquestrador de contêineres _Docker_ foi utilizado neste laboratório. Um con
 
 ## Implementações da equipe
 
-Seguindo o _template_ fornecido com a documentação do Linux PAM, foi implementada uma aplicação em linguagem C que realiza a autenticação do usuário do sistema utilizando o PAM. Para tanto, a aplicação importa a biblioteca do PAM e chama os módulos referentes ao processo de `"system-auth"`. (Arquivo: [pamtest.c](https://github.com/gitoso/CES33-Linux-PAM/blob/master/Lab%202:%20Autentica%C3%A7%C3%A3o%20com%20OpenLDAP/pamtest.c))
+Seguindo o _template_ fornecido com a documentação do Linux PAM, foi implementada uma aplicação em linguagem C que realiza a autenticação do usuário do sistema utilizando o PAM. (Arquivo: [pamtest.c](https://github.com/gitoso/CES33-Linux-PAM/blob/master/Lab%202:%20Autentica%C3%A7%C3%A3o%20com%20OpenLDAP/pamtest.c))
 
 Além disso, foi configurado um contêiner pela equipe (também seguindo documentação de referência) para atuar como servidor de diretórios. (Diretório: [OpenLDAP-Container](https://github.com/gitoso/CES33-Linux-PAM/tree/master/Lab%202:%20Autentica%C3%A7%C3%A3o%20com%20OpenLDAP/OpenLDAP-Container))
 
