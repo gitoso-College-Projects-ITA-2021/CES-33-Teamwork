@@ -19,7 +19,7 @@ Além disso, foi configurado um contêiner pela equipe (também seguindo documen
 ### Dependências
 Para executar este laboratório, será necessário ter instalado a ferramenta _Docker_ e também um cliente local para acessar o _OpenLDAP_. Para instalar essas ferramentas no _Ubuntu_, basta executar:
 ```
-sudo apt install docker.io
+sudo apt install docker.io gcc libpam0g-dev
 ```
 
 ### Preparar o contêiner com o servidor OpenLDAP
@@ -126,11 +126,90 @@ Pronto. Com o usuário criado, prosseguiremos o tutorial.
 
 ### Configurar o cliente OpenLDAP na máquina para encontrar os usuários do servidor
 
+Antes de configurar vamos instalar o cliente para o _OpenLDAP_:
+
+```
+sudo apt install libnss-ldap libpam-ldap ldap-utils
+```
+
+Durante a instalação você será intimado a digitar algumas informações no _prompt_:
+
+Para a configuração de endereço no `ldap-auth-config` utilize o seguinte endereço: `ldap://127.0.0.1`. Note que você deve alterar o protocolo de `ldapi://` para `ldap://` (sem o `i`).
+
+![OpenLDAP 1](screenshots/openldap1.png)
+
+Para a configuração da base de dados, utilize o valor: `dc=ces33,dc=com`
+
+![OpenLDAP 2](screenshots/openldap2.png)
+
+Para a versão do LDAP, selecione a versão 3
+
+![OpenLDAP 3](screenshots/openldap3.png)
+
+Para "_Make local root Database admin?_" responta "_Yes_"
+
+![OpenLDAP 4](screenshots/openldap4.png)
+
+Para "_Does the LDAP database require login?_" responda "_No_"
+
+![OpenLDAP 5](screenshots/openldap5.png)
+
+Para "_LDAP account for root_" digite `cn=root,dc=ces33,dc=com`
+
+![OpenLDAP 6](screenshots/openldap6.png)
+
+Em "_LDAP root account password_" digite `ces33`
+
+![OpenLDAP 7](screenshots/openldap7.png)
+
+Edite o arquivo `/etc/nsswitch.conf` e adicione a palavra `ldap` às configurações `passwd`, `group` e `shadow`. O seu arquivo deve ficar com a seguinte aparência:
+
+```
+passwd:     files   systemd   ldap
+group:      files   systemd   ldap
+shadow:     files   ldap
 ...
+```
+
+Inicie o serviço do NSS (para identificar os usuários do OpenLDAP como usuários do sistema):
+
+```
+sudo service nslcd start
+```
+
+Para verificar se tudo ocorreu bem, execute o comando `getent passwd` para verificar os usuários do sistema, e confira se ao final da lista está o usuário criado no _OpenLDAP_.
+
+![OpenLDAP 8](screenshots/openldap8.png)
+
+Se você conseguiu ver o usuário criado, a instalação e configuração do cliente _OpenLDAP_ foi um sucesso.
 
 ### "Plugar" os módulos do LDAP no Linux PAM
 
-...
+O sistema se comunica com o _OpenLDAP_, mas a configuração para a autenticação do tipo `system-auth` (que a aplicação `pamtest.c` tenta realizar) precisa ser plugada via PAM ao módulo do _OpenLDAP_. Crie um arquivo `/etc/pam.d/system-auth` e preencha com o conteúdo.
+
+```
+auth      sufficient pam_ldap.so
+auth      required  pam_unix.so     try_first_pass nullok
+auth      optional  pam_permit.so
+auth      required  pam_env.so
+
+account   sufficient pam_ldap.so
+account   required  pam_unix.so
+account   optional  pam_permit.so
+account   required  pam_time.so
+
+password  sufficient pam_ldap.so
+password  required  pam_unix.so     try_first_pass nullok sha512 shadow
+password  optional  pam_permit.so
+
+session   required  pam_limits.so
+session   required  pam_unix.so
+session   optional  pam_ldap.so
+session   optional  pam_permit.so
+```
+
+Tente entender a configuração desse arquivo em conjunto com a análise do código do arquivo `pamtest.c` deste repositório. Esta é a chave deste laboratório.
+
 
 ### Compilar a aplicação em C
 
@@ -148,6 +227,6 @@ Para executar a aplicação basta:
 ./pamtest
 ```
 
-Teste a aplicação e perceba como é possível realizar a autenticação tanto com usuários da máquina quando com usuários criados no servidor OpenLDAP.
+Teste a aplicação e perceba como é possível realizar a autenticação utilizando os usuários criados no _OpenLDAP_.
 
 ![Fim](https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif)
