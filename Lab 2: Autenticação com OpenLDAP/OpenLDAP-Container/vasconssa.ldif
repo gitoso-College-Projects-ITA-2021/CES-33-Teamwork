@@ -1,0 +1,21 @@
+dn: uid=vasconssa,ou=People,dc=ces33,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: vasconssa
+cn: Raphael de Vasconcelos Nascimento
+sn: Vasconcelos
+givenName: Raphael
+title: Guinea Pig
+telephoneNumber: +0 000 000 0000
+mobile: +0 000 000 0000
+postalAddress: AddressLine1$AddressLine2$AddressLine3
+userPassword: vasconssa
+labeledURI: https://archlinux.org/
+loginShell: /bin/bash
+uidNumber: 999
+gidNumber: 999
+homeDirectory: /home/vsc

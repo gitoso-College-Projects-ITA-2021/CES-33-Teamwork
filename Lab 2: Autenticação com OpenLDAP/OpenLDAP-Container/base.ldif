@@ -1,0 +1,26 @@
+# example.org
+dn: dc=ces33,dc=com
+dc: ces33
+o: Example Organization
+objectClass: dcObject
+objectClass: organization
+
+# Manager, example.org
+dn: cn=root,dc=ces33,dc=com
+cn: root
+description: LDAP administrator
+objectClass: organizationalRole
+objectClass: top
+roleOccupant: dc=ces33,dc=com
+
+# People, example.org
+dn: ou=People,dc=ces33,dc=com
+ou: People
+objectClass: top
+objectClass: organizationalUnit
+
+# Groups, example.org
+dn: ou=Group,dc=ces33,dc=com
+ou: Group
+objectClass: top
+objectClass: organizationalUnit
