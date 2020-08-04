@@ -16,7 +16,7 @@ Este laboratório foi realizado em um sistema operacional _Ubuntu 20.04_ e o apl
 Inicialmente deve-se instalar o pacote para o sistema operacional que irá fornecer as bibliotecas dinâmicas que serão carregadas utilizadas pelo PAM ("plugadas" ao PAM) para utilizar o autenticador do _Google_ bem como a aplicação em modo texto que será utilizada para guiar o usuário durante o processo de configuração de um novo _token_. Para tanto deve-se executar o comando:
 
 ```
-sudo apt-get install libpam-google-authenticator
+sudo apt install libpam-google-authenticator
 ```
 
 ### Configurar o PAM para utilizar o módulo do Google Authenticator
